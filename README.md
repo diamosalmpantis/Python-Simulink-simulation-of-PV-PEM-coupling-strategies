@@ -32,10 +32,7 @@ Each case folder contains one MATLAB driver script (`.m`) and its Simulink model
 
 The "Applying Model Patches" message printed at the start of each run is expected. The script loads the base model and creates a working copy internally. MATLAB handles this automatically. There is no separate file to look for.
 
-**A `private_data/` subfolder appears inside `01_PEM_Validation/` and `02_Downscaling_Algorithms/`.** These hold the experimental and measurement files the scripts expect at those exact relative paths. The data itself is not intended for public redistribution. See [Data availability](#data-availability) below. Exclude this folder before pushing to a public remote, for example with a `.gitignore` entry:
-```
-**/private_data/
-```
+The scripts in `01_PEM_Validation/` and `02_Downscaling_Algorithms/` expect their experimental and measurement input files inside a `private_data/` subfolder at each script's location. This data is not distributed in this repository. See [Data availability](#data-availability) below for how to obtain it.
 
 ## Requirements
 
@@ -60,9 +57,9 @@ pip install numpy pandas matplotlib scipy scikit-learn pvlib openpyxl
 
 ## How to run
 
-**1. PEM validation.** Run `Sim_vs_meas_static.m` (steady-state) and `Sim_vs_meas_dynamic.m` (dynamic) in MATLAB. Each script calls its companion Simulink model and reports RMSE, MAE, and R² against the experimental data expected at `private_data/PEM_recorded_data.xlsx` and `private_data/PEM_dyn_wind_data_short.xlsx`. See [Data availability](#data-availability).
+**1. PEM validation.** Run `Sim_vs_meas_static.m` (steady-state) and `Sim_vs_meas_dynamic.m` (dynamic) in MATLAB. Each script calls its companion Simulink model and reports RMSE, MAE, and R² against the experimental measurement data (see [Data availability](#data-availability) for how to obtain it).
 
-**2. Downscaling algorithms.** Run `ghi_downscaling_v5_KNN.py` and `Final_Temperature_Downscaling.py` directly with Python. Both expect the reference 1-minute record at `private_data/henrik_davidsson_weather_data (1).csv`. Each script runs all three candidate algorithms for its variable and reports NRMSE, NMBE, and R² for GHI, or RMSE, MAE, and R² for temperature.
+**2. Downscaling algorithms.** Run `ghi_downscaling_v5_KNN.py` and `Final_Temperature_Downscaling.py` directly with Python. Both expect the reference 1-minute meteorological record described in [Data availability](#data-availability). Each script runs all three candidate algorithms for its variable and reports NRMSE, NMBE, and R² for GHI, or RMSE, MAE, and R² for temperature.
 
 **3. No-battery cases.** Run the `.m` driver script in each `CaseN_*` folder from MATLAB. It loads the co-located `.slx` model itself. Case 3 (Reconfigurable) additionally requires the scripts in `Reconfiguration_Controller/`. The Python side (`optimal_np_finder.py`, `realtime_np_controller.py`, `np_controller_step.py`) pre-computes the optimal string-count sequence. The Simulink side (`sfunc_np_controller.m`, `np_controller_block.m`) reads that sequence through a `From Workspace` block. `PV_PEM_reconfigurable.m` also calls `pyenv` to locate a Python interpreter. If MATLAB doesn't auto-detect one, set the path explicitly as instructed in the script's comment. Run `compare_cases.m` afterwards to reproduce the comparative figures and KPIs.
 
@@ -72,11 +69,9 @@ pip install numpy pandas matplotlib scipy scikit-learn pvlib openpyxl
 
 ## Data availability
 
-The raw measurement files are not distributed in this public repository. Each script expects its input file at the `private_data/` path noted above. Obtain the corresponding dataset and place it there under the exact filename the script expects, or contact the corresponding author.
+The raw measurement and reference data used by the scripts in this repository are not distributed here. If you would like access to this data, please contact the corresponding author.
 
-- The Lyngby 1-minute meteorological reference record (`henrik_davidsson_weather_data (1).csv`) was curated by co-author Henrik Davidsson and is available from the corresponding author on reasonable request.
-- The PEM validation dataset (`PEM_recorded_data.xlsx`, `PEM_dyn_wind_data_short.xlsx`) was obtained from Pape et al. (2025), *International Journal of Hydrogen Energy*, 127, 51–63 ([doi.org/10.1016/j.ijhydene.2025.03.387](https://doi.org/10.1016/j.ijhydene.2025.03.387)). Consult that publication for original data access terms.
-- The cross-location (CNR, Navarra, Spain) results reported in the manuscript use the same models in this repository, re-run against the openly available BSRN station record: Olano, X. (2024). *Basic measurements of radiation at station CNER (2023)*, PANGAEA ([doi.org/10.1594/PANGAEA.931893](https://doi.org/10.1594/PANGAEA.931893)). The CNR-specific driver scripts are not included here, to keep the repository focused on the primary Lyngby case study. They follow the identical structure of the scripts provided and are available from the corresponding author on request.
+For context, the PEM electrochemical validation data originates from Pape et al. (2025), *International Journal of Hydrogen Energy*, 127, 51–63 ([doi.org/10.1016/j.ijhydene.2025.03.387](https://doi.org/10.1016/j.ijhydene.2025.03.387)), and the cross-location (CNR, Navarra, Spain) results reported in the manuscript use the same models in this repository, re-run against the openly available BSRN station record of Olano, X. (2024), *Basic measurements of radiation at station CNER (2023)*, PANGAEA ([doi.org/10.1594/PANGAEA.931893](https://doi.org/10.1594/PANGAEA.931893)). The CNR-specific driver scripts are not included here, to keep the repository focused on the primary Lyngby case study, but are available from the corresponding author on request.
 
 ## Citation
 
