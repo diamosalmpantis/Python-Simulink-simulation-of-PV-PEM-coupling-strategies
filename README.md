@@ -5,7 +5,7 @@ This repository contains the simulation code accompanying the manuscript of the 
 ## Repository structure
 
 ```
-01_PEM_Validation/            PEM equivalent-electrical-circuit (EEC) model validation
+01_PEM_Validation/             PEM equivalent-electrical-circuit (EEC) model validation
                                against experimental data (static and dynamic cases)
 02_Downscaling_Algorithms/     Hourly-to-1-minute downscaling for GHI (White Noise,
                                Markov+AR(1), Hybrid KNN) and ambient temperature
