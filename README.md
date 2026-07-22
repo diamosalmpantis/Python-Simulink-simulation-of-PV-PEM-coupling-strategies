@@ -10,7 +10,7 @@ This repository contains the simulation code accompanying the manuscript of the 
 02_Downscaling_Algorithms/     Hourly-to-1-minute downscaling for GHI (White Noise,
                                Markov+AR(1), Hybrid KNN) and ambient temperature
                                (Linear, PCHIP, Hybrid KNN)
-03_No_Battery_Cases/           Case 1 (Indirect), Case 2 (Static Direct),
+03_No_Battery_Cases/           Case 1 (Static Direct), Case 2 (Indirect),
                                Case 3 (Reconfigurable Direct) + reconfiguration
                                controller + post-processing
 04_Battery_Cases/              Case 4 (Indirect + EMS), Case 5 (Direct + Passive
