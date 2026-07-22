@@ -24,7 +24,7 @@ Each case folder contains a MATLAB driver script (`.m`) and its corresponding Si
 ## Requirements
 
 **MATLAB/Simulink**
-Developed and tested in MATLAB/Simulink R2025b. The models use only standard Simulink/Simscape Electrical blocks and should be compatible with recent prior releases (R2021b or later); if you encounter a version-compatibility prompt on opening a `.slx` file, allow MATLAB to update it.
+Developed and tested in MATLAB/Simulink R2025b. The models use only standard Simulink/Simscape Electrical blocks and should be compatible with recent prior releases (R2021b or later). If you encounter a version-compatibility prompt on opening a `.slx` file, allow MATLAB to update it.
 
 **Python** (downscaling algorithms and the reconfiguration controller)
 Python ≥ 3.10, with:
