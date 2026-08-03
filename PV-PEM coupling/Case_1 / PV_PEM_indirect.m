@@ -113,9 +113,6 @@ end
  
 % STREAMING_CHUNK:Applying data smoothing and interpolation...
 % -----------------------------------------------------------------
-%  FIX 1 — SMOOTH IRRADIANCE (3-point moving average)
-%  Removes minute-to-minute step discontinuities that cause the
-%  Ra capacitor state derivative to become non-finite.
 % -----------------------------------------------------------------
 Irr_val  = movmean(Irr_val,  3);
 Temp_val = movmean(Temp_val, 3);
@@ -130,9 +127,6 @@ fprintf('  Real duration : %.1f days\n',  sim_t * scale_factor / 86400);
 fprintf('  Sim-time span : %.4f s\n\n',   sim_t);
  
 % -----------------------------------------------------------------
-%  FIX 2 — ZERO-ORDER HOLD INTERPOLATION
-%  'previous' avoids ramp artefacts that the Simscape solver
-%  must differentiate, amplifying numerical noise near large steps.
 % -----------------------------------------------------------------
 Irr_stair_tsamp = 60 / scale_factor;
 Irr_stair_time  = (0 : Irr_stair_tsamp : sim_t)';
@@ -198,10 +192,6 @@ for i = 1:length(blocks)
     end
  
     % -----------------------------------------------------------------
-    %  FIX 3 — PS CONVERTER FILTER TIME CONSTANT = tau_a/100 = 4 ms
-    %  The original 1e-3 s filter is acceptable here (closer to tau_a
-    %  than in the direct script), but we tighten it to tau_a/100 for
-    %  consistency and to prevent near-impulsive inputs on large steps.
     % -----------------------------------------------------------------
     try
         ref = get_param(b, 'ReferenceBlock');
@@ -247,8 +237,6 @@ for i = 1:length(blocks)
     end
  
     % -----------------------------------------------------------------
-    %  FIX 4 — SCOPE BUFFER SIZED FOR 340-DAY DATASET
-    %  489,600 samples expected; buffer = 520,000 (6% margin).
     % -----------------------------------------------------------------
     if strcmp(b_type, 'Scope')
         try
@@ -263,9 +251,6 @@ fprintf('  [OK] MPPT PI tuning and duty-cycle clamping applied.\n');
  
 % STREAMING_CHUNK:Finalizing solver parameters and running simulation...
 % -----------------------------------------------------------------
-%  FIX 5 — TIGHTENED SOLVER SETTINGS
-%  RelTol/AbsTol tightened; MaxStep tied to input sample period.
-%  NormControl is NOT a valid set_param key and is omitted.
 % -----------------------------------------------------------------
 set_param(mdl, 'StopTime',       num2str(sim_t));
 set_param(mdl, 'Solver',         'ode15s');
@@ -724,9 +709,6 @@ TS = table( ...
  
 % STREAMING_CHUNK:Writing correctly to Excel using append without Range...
 % -----------------------------------------------------------------
-%  FIX 6 — APPEND-SAFE WRITER
-%  Branch 1 — fresh file: write with header
-%  Branch 2 — existing data: append rows only, no header
 % -----------------------------------------------------------------
 write_header = true;
 next_row     = 2;
