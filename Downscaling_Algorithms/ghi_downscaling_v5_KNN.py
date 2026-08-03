@@ -4,7 +4,6 @@ Created on Tue Apr 28 15:17:38 2026
 
 @author: Diamantis
 """
-
 """
 GHI Downscaling Algorithm -- Version 5: K-Nearest Neighbors (KNN)
 ============================================================================
