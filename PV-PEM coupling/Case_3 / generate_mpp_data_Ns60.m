@@ -5,14 +5,7 @@
 % Uses a single-diode PV model to sweep irradiance levels and extract the
 % true MPP (V_mpp, I_mpp, P_mpp) for each case.  Fits 2nd-order polynomials
 % and saves in the same format as the existing mpp_data_Ns45_*.mat files.
-%
-% Saves to TWO locations so the simulation scripts find the file regardless
-% of which directory MATLAB is running from:
-%   1.  <this script's folder>   (Final_Batt_Comparison)
-%   2.  One level up  ../        (Hanna Thesis_Laptop)
-%
-% Run this once before re-running Direct_hourly.m / Indirect_hourly.m /
-% Rec_hourly.m so those scripts use accurate MPP references.
+
 % =========================================================================
 clear; clc;
 fprintf('=== MPP data generator  Ns=60, Np=5/6/7 ===\n\n');
