@@ -14,7 +14,7 @@ fprintf('=== PV-PEM Setup & Simulation (Perfect MPPT Version) ===\n\n');
 % =========================================================================
 %  SECTION 1 — PEM ELECTROLYZER PARAMETERS
 % =========================================================================
-N = 10;                     % number of PEM cells in series
+N = 16;                     % number of PEM cells in series
 % Per-cell Randles equivalent-circuit parameters
 Vint    = 1.475841;         % [V]    thermodynamic OCV per cell
 Rint    = 0.008673;         % [Ω]    ohmic (membrane) resistance per cell
