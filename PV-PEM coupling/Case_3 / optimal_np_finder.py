@@ -63,13 +63,13 @@ Np_candidates = [5, 6, 7]
 Isc_cell  = 10.14
 Voc_cell  =  0.67
 Impp_cell =  9.59
-Vmpp_cell =  0.56
+Vmpp_cell =  0.55
 
 alpha_Isc  =  0.0005
 beta_Voc   = -0.0030
 beta_Vmpp  = -0.0035
 
-N_pem      = 13
+N_pem      = 16
 Vint_stack = 1.475841 * N_pem
 R_total    = (0.008673 + 0.00177 + 0.0005) * N_pem
 Vmax_PEM   = 2.0 * N_pem
