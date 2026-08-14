@@ -57,7 +57,7 @@ except NameError:
 # -----------------------------------------------------------------------
 # 1 – SYSTEM PARAMETERS  (keep in sync with G_direct_recon__no_batt_run.m)
 # -----------------------------------------------------------------------
-Ns            = 45
+Ns            = 60
 Np_candidates = [5, 6, 7]
 
 Isc_cell  = 10.14
